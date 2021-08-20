@@ -55,14 +55,13 @@ class MoviesController extends Controller
         /* Upload Movie poster after Updating fields into db */
         if ($request->file("poster")) {
             $profileImagePath = storage_path("app/public/movie-images");
-             if(!is_dir($profileImagePath))
+            if(!is_dir($profileImagePath))
             {
                 mkdir($profileImagePath);
             }
             $fileName = time().'_'.$request->file("poster")->getClientOriginalName();
             $request->file("poster")->move($profileImagePath, $fileName);
         }
-
         $data = $request->all();
         $data['poster'] = $fileName;
         Movies::create($data);

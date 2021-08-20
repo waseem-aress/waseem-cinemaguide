@@ -23,11 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post("/register",[App\Http\Controllers\API\FrontAPIController::class, 'register']);
 
 // Protected Routes
-// Route::group(['prefix' => 'auth'], function () {
-    Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('movies', [App\Http\Controllers\API\FrontAPIController::class, 'movies']);
-        Route::get('cinemas', [App\Http\Controllers\API\FrontAPIController::class, 'cinemas']);
-        Route::get('cinema/{name}', [App\Http\Controllers\API\FrontAPIController::class, 'cinema_details']);
-        Route::get('movie/{title}', [App\Http\Controllers\API\FrontAPIController::class, 'movie_details']);
-    });
-// });
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('movies', [App\Http\Controllers\API\FrontAPIController::class, 'movies']);
+    Route::get('cinemas', [App\Http\Controllers\API\FrontAPIController::class, 'cinemas']);
+    Route::get('cinema/{name}', [App\Http\Controllers\API\FrontAPIController::class, 'cinema_details']);
+    Route::get('movie/{title}', [App\Http\Controllers\API\FrontAPIController::class, 'movie_details']);
+    Route::get('/movies/{name}/{date}', [App\Http\Controllers\Api\CinemaAPIController::class, 'cinema_movie'])->name('cinema-movie');
+});

@@ -45,10 +45,6 @@
                     <p>{{ $message }}</p>
                   </div>
                 @endif
-                <?php
-                print_r($cinema->id);
-                exit;
-                ?>
                 <form method="POST"
                 action="{{route('cinemas.update', $cinema->id) }}"
                  id="updateCinemaForm">

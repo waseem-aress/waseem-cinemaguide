@@ -27,19 +27,26 @@ class Movies extends Model
     }
 
     public function getparentalRatingAttribute($value) {
-        if ($value == '1') {
+
+        switch ($value) {
+            case '1';
             return 'G';
-        } else if ($value == '2') {
+            break;
+            case '2';
             return 'PG';
-        } else if ($value == '3') {
+            break;
+            case '3';
             return 'M';
-        } else if ($value == '4') {
+            break;
+            case '4';
             return 'MA 15+';
-        } else if ($value == '5') {
+            break;
+            case '5';
             return 'R 18+';
-        } else {
+            break;
+            default:
             return 'X 18+';
-        }
+          }
     }
 
 }

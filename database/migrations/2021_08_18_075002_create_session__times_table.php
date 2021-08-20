@@ -15,11 +15,14 @@ class CreateSessionTimesTable extends Migration
     {
         Schema::create('session__times', function (Blueprint $table) {
             $table->id();
-            $table->integer('movie_id')->references('id')->on('movies')->onDelete('cascade');
-            $table->integer('cinema_id')->references('id')->on('cinemas')->onDelete('cascade');
+            $table->unsignedBigInteger('movie_id');
+            $table->index('movie_id');
+            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
+            $table->unsignedBigInteger('cinema_id');
+            $table->index('cinema_id');
+            $table->foreign('cinema_id')->references('id')->on('cinemas')->onDelete('cascade');
             $table->dateTime('date_time');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
