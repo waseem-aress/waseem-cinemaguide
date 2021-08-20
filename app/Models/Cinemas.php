@@ -20,12 +20,7 @@ class Cinemas extends Model
         'updated_at'
     ];
 
-    
-
-    // public function session_times()
-    // {
-    //     return $this->belongsToMany(Session_Times::class, 'session__times');
-    // }
+   // Function  to get all ciname session times
 
     public function session_times()
     {
