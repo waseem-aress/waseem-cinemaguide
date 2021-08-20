@@ -1,0 +1,128 @@
+@extends('layouts.app')
+
+@section('content')
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content">
+      <div class="container-fluid">
+      <div class="row mb-0 mt-5">
+          <div class="col-sm-6">
+            <h1>{{ __('Cinema') }}</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ route('cinemas.index') }}" >Home</a></li>
+              <li class="breadcrumb-item active">{{ __('Create Cinema') }}</li>
+            </ol>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">Create Cinema</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                @if ($errors->any())
+                  <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                      @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div><br />
+                @endif
+                @if ($message = Session::get('error'))
+                  <div class="alert alert-danger">
+                    <p>{{ $message }}</p>
+                  </div>
+                @endif
+                <form method="POST" action="{{ route('cinemas.store') }}" id="createCinemaForm">
+                  @csrf
+                  <div class="card">
+                    <div class="form-new-outer">
+                      <!-- /.card-header -->
+                      <div class="card-body">
+                        <div class="form-section-main">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="name">{{ __('Name') }} :</label>
+                                <input type="text" class="form-control" name="name" id="name">
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="address">{{ __('Address') }} :</label>
+                                <input type="text" class="form-control" name="address" id="address">
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="geo_lat_long">{{ __('Geo Location') }} :</label>
+                                <input type="text" class="form-control" name="geo_lat_long" id="geo_lat_long">
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="seating_capacity">{{ __('Seating Capacity') }} :</label>
+                                <input type="text" class="form-control" name="seating_capacity" id="seating_capacity" maxlength="3">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12">
+                            <button type="submit" name="submit" class="btn btn-success">{{ __('Create Cinema') }}</button>
+                            <a href="{{ route('cinemas.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+@endsection
+
+@section('script')
+  <script>
+    $(document).ready(function() {
+      $("#createCinemaForm").validate({
+        rules: {
+          name: {
+            required: true
+          },
+          address: {
+            required: true
+          },
+          geo_lat_long: {
+            required: true
+          },
+          seating_capacity: {
+            required: true,
+            number: true
+          }
+        }
+      });
+    });
+  </script>
+@endsection
